@@ -5,8 +5,7 @@ module decoder(input [1:0] op,
                     output reg [2:0] alu_control,
                     output reg [1:0] imm_src,
                     output reg pc_s, reg_src_a, reg_src_b, mem_to_reg, alu_src,
-                    output reg reg_write, mem_write,
-
+                    output reg reg_write, mem_write
                     );
 
     reg alu_op, branch;

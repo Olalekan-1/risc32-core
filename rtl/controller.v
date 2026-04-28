@@ -3,7 +3,7 @@ module controller(input clk, reset,
                   input [3:0] alu_flags,
                   output reg reg_write_en, mem_write_en, pc_src, reg_src_a, reg_src_b, mem_to_reg, alu_src,
                   output [2:0] alu_control, 
-                  output [1:0] imm_src,
+                  output [1:0] imm_src
                 );
 
     wire [3:0] flag_w;
@@ -13,7 +13,7 @@ module controller(input clk, reset,
                       .flag_en(flag_w), .alu_control(alu_control), .imm_src(imm_src)
                       .pc_s(pc_s), .reg_src_a(reg_src_a), .reg_src_b(reg_src_b),
                       .mem_to_reg(mem_to_reg), .alu_src(alu_src), .reg_write(reg_write)
-                      .mem_write(mem_write) 
+                      .mem_write(mem_write)
                       );
 
 
