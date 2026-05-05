@@ -1,0 +1,68 @@
+$date
+	Tue May  5 00:23:31 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module adder_tb $end
+$var wire 32 ! y [31:0] $end
+$var reg 32 " a [31:0] $end
+$var reg 32 # b [31:0] $end
+$scope module uut $end
+$var wire 32 $ a [31:0] $end
+$var wire 32 % b [31:0] $end
+$var wire 32 & y [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+b0 !
+$end
+#10000
+b101 #
+b101 %
+b1111 !
+b1111 &
+b1010 "
+b1010 $
+#20000
+b11001000 #
+b11001000 %
+b100101100 !
+b100101100 &
+b1100100 "
+b1100100 $
+#30000
+b100 #
+b100 %
+b11000 !
+b11000 &
+b10100 "
+b10100 $
+#40000
+b11 #
+b11 %
+b11111111111111111111111111111110 !
+b11111111111111111111111111111110 &
+b11111111111111111111111111111011 "
+b11111111111111111111111111111011 $
+#50000
+b1 #
+b1 %
+b0 !
+b0 &
+b11111111111111111111111111111111 "
+b11111111111111111111111111111111 $
+#60000
