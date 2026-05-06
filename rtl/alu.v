@@ -24,7 +24,8 @@ module alu(input [31:0] src_a, src_b,
 
          3'b011: begin
             {carry, alu_result} = src_a - src_b;
-            overflow = ((src_a[31] == src_b[31]) && (alu_result[31] != src_a[31]));
+            overflow = ((src_a[31] != src_b[31]) && (alu_result[31] != src_a[31]));
+
         end
         3'b100:begin
            alu_result = src_a ^ src_b;
@@ -41,8 +42,9 @@ module alu(input [31:0] src_a, src_b,
         endcase
     end
 
-    assign zero = (alu_result == 0);
-    assign negative = alu_result[31];
-
+   always @(*) begin
+    zero = (alu_result == 0);
+    negative = alu_result[31];
+    end
 
 endmodule

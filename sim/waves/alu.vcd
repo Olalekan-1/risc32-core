@@ -1,0 +1,90 @@
+$date
+	Wed May  6 22:48:25 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module alu_tb $end
+$var wire 1 ! zero $end
+$var wire 1 " overflow $end
+$var wire 1 # negative $end
+$var wire 1 $ carry $end
+$var wire 32 % alu_result [31:0] $end
+$var reg 3 & alu_control [2:0] $end
+$var reg 32 ' src_a [31:0] $end
+$var reg 32 ( src_b [31:0] $end
+$scope module uut $end
+$var wire 3 ) alu_control [2:0] $end
+$var wire 32 * src_a [31:0] $end
+$var wire 32 + src_b [31:0] $end
+$var reg 32 , alu_result [31:0] $end
+$var reg 1 $ carry $end
+$var reg 1 # negative $end
+$var reg 1 " overflow $end
+$var reg 1 ! zero $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1111111111111111111111111111111 ,
+b1111111111111111111111111111111 +
+b1111111111111111111111111111111 *
+b0 )
+b1111111111111111111111111111111 (
+b1111111111111111111111111111111 '
+b0 &
+b1111111111111111111111111111111 %
+0$
+0#
+0"
+0!
+$end
+#10000
+b1 &
+b1 )
+#20000
+1#
+1"
+b11111111111111111111111111111110 %
+b11111111111111111111111111111110 ,
+b10 &
+b10 )
+#30000
+0#
+1!
+0"
+b0 %
+b0 ,
+b11 &
+b11 )
+#40000
+b100 &
+b100 )
+#50000
+1#
+0!
+1$
+b11111111111111111111111111111100 %
+b11111111111111111111111111111100 ,
+b10 &
+b10 )
+b11111111111111111111111111111110 (
+b11111111111111111111111111111110 +
+b11111111111111111111111111111110 '
+b11111111111111111111111111111110 *
+#60000
+1"
+b10000000000000000000000000000001 %
+b10000000000000000000000000000001 ,
+b11 &
+b11 )
+b1111111111111111111111111111111 '
+b1111111111111111111111111111111 *
+#70000
