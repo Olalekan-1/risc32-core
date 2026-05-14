@@ -1,5 +1,5 @@
-module pc(input clk, reset, en,
-          input[31:0] data,
+module pc(input clk, reset,
+          input [31:0] data,
           output reg [31:0] q
           );
 
@@ -7,7 +7,7 @@ module pc(input clk, reset, en,
         if (reset) 
             q <= 0;
 
-        else if (en) 
+        else
             q <= data;
     end
 

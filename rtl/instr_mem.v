@@ -5,7 +5,8 @@ module instr_mem(input [31:0] addr,
     reg [31:0] ROM[31:0];
         initial
             $readmemh("file.dat", ROM);
-            assign read_data = ROM[addr[31:2]];
-
-
+           
+        always @(*) begin
+        read_data = ROM[addr[31:2]];
+         end
 endmodule

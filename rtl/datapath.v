@@ -1,9 +1,9 @@
 module datapath(input clk, reset, reg_write_en, mem_write_en, pc_src, reg_src_a, reg_src_b, mem_to_reg, alu_src,
                 input [2:0] alu_control, 
                 input [1:0] imm_src,
-                output reg  [3:0] alu_flags,
-                output reg [31:0] write_data, alu_result, pc,
-                input [31:0] read_data, instr,
+                output [3:0] alu_flags,
+                output [31:0] write_data, alu_result, pc,
+                input [31:0] read_data, instr
                 );
 
 
@@ -13,7 +13,7 @@ module datapath(input clk, reset, reg_write_en, mem_write_en, pc_src, reg_src_a,
 
     // program counter logic
     mux2 #(32) pc_mux(.data_1(result), .data_2(pc_plus4), .sel(pc_src), .out(pc_next));
-    pc pc_flops(.clk(clk), .reset(reset), .en(pc_src), .data(pc_next), .q(pc));
+    pc pc_flops(.clk(clk), .reset(reset), .data(pc_next), .q(pc));
     adder plus4_adder(.a(pc), .b(32'b100), .y(pc_plus4));
     adder plus8_adder(.a(pc_plus4), .b(32'b100), .y(pc_plus8));
 
