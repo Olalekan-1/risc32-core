@@ -30,6 +30,8 @@ module datapath_tb;
 
     // clock generator
     always #1 clk = ~clk;
+
+    /* simulate and test register files and its related logic */
     
     
     initial begin
