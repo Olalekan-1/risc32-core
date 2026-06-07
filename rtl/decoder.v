@@ -15,15 +15,15 @@ module decoder(input [1:0] op,
 // main decoder
     always @(*) begin
         case(op)
-            2'b00: if (funct[0]) contr_sigs = 10'b0001100010;
+            2'b00: if (funct[5]) contr_sigs = 10'b0001100010;
                     else contr_sigs = 10'b0000100010;
-            2'01: if (funct[0]) = contr_sigs = 10'b0001010110;
+            2'b01: if (funct[0]) contr_sigs = 10'b0001010110;
                     else contr_sigs = 10'b0101000101;
-            2'b11: contr_sigs = 10'b1011011000;
+            2'b10: contr_sigs = 10'b1011011000;
             default: contr_sigs = 10'b0;
         endcase
     
-        assign {reg_src_a, reg_src_b, branch, alu_src, alu_op, mem_to_reg, imm_src, reg_write, mem_write} = contr_sigs;
+        {reg_src_a, reg_src_b, branch, alu_src, alu_op, mem_to_reg, imm_src, reg_write, mem_write} = contr_sigs;
     end
 
 
@@ -52,7 +52,9 @@ module decoder(input [1:0] op,
     end
 
 
-    assign pc_s = ((rd == 4'b1111) & reg_write) | branch;
+    always @(*) begin
+        pc_s = ((rd == 4'b1111) & reg_write) | branch;
+    end
 
 
 endmodule
