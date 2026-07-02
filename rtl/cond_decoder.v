@@ -6,17 +6,21 @@ module cond_decoder(input clk, reset, pc_s, reg_write, mem_write,
 
     wire [3:0] flags;
     wire [3:0] flag_en;
-    reg cond_ex;
+    wire cond_ex;
 
     dff z_ff(.clk(clk), .reset(reset), .en(flag_en[3]), .d(alu_flags[3]), .q(flags[3]));
     dff n_ff(.clk(clk), .reset(reset), .en(flag_en[2]), .d(alu_flags[2]), .q(flags[2]));
     dff c_ff(.clk(clk), .reset(reset), .en(flag_en[1]), .d(alu_flags[1]), .q(flags[1]));
     dff v_ff(.clk(clk), .reset(reset), .en(flag_en[0]), .d(alu_flags[0]), .q(flags[0]));
 
-    assign mem_write_en = cond_ex & mem_write;
-    assign reg_write_en = cond_ex & reg_write;
-    assign pc_src = cond_ex & pc_s;
-    assign flag_en = flag_w & (4{cond_ex});
+    always @(*) begin
+        mem_write_en = cond_ex & mem_write;
+        reg_write_en = cond_ex & reg_write;
+        pc_src = cond_ex & pc_s;
+
+    end
+    assign flag_en = (flag_w) & {4{cond_ex}};
+   
 
     cond_check cond_check_i (
         .cond(cond),
@@ -33,7 +37,7 @@ endmodule
 
 
 module cond_check(input [3:0] cond,
-                  input Z, N, C, V
+                  input Z, N, C, V,
                   output reg cond_ex
                 );
 
