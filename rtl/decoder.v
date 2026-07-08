@@ -19,7 +19,7 @@ module decoder(input [1:0] op,
                     else contr_sigs = 10'b0000100010;
             2'b01: if (funct[0]) contr_sigs = 10'b0001010110;
                     else contr_sigs = 10'b0101000101;
-            2'b10: contr_sigs = 10'b1011011000;
+            2'b10: contr_sigs = 10'b1011001000;
             default: contr_sigs = 10'b0;
         endcase
     
@@ -32,11 +32,11 @@ module decoder(input [1:0] op,
     always @(*) begin
         if (alu_op) begin
             case(funct[4:1])
-                4'b0000: alu_control = 3'b000;
-                4'b0001: alu_control = 3'b001;
-                4'b0010: alu_control = 3'b010;
-                4'b0011: alu_control = 3'b011;
-                4'b0100: alu_control = 3'b100;
+                4'b0000: alu_control = 3'b000; // and
+                4'b0001: alu_control = 3'b001; // or
+                4'b0010: alu_control = 3'b010; // add
+                4'b0011: alu_control = 3'b011; // sub
+                4'b0100: alu_control = 3'b100; // xor
                 default: alu_control = 3'b0;
             endcase
             flag_en[0] = funct[0] & (alu_control == 3'b010 | alu_control == 3'b011);
@@ -53,7 +53,7 @@ module decoder(input [1:0] op,
 
 
     always @(*) begin
-        pc_s = ((rd == 4'b1111) & reg_write) | branch;
+        pc_s = ((rd == 4'b1111) && reg_write) | branch;
     end
 
 

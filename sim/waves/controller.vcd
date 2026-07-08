@@ -1,0 +1,500 @@
+$date
+	Wed Jul  8 10:48:53 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module controller_tb $end
+$var wire 1 ! reg_write_en $end
+$var wire 1 " reg_src_b $end
+$var wire 1 # reg_src_a $end
+$var wire 1 $ pc_src $end
+$var wire 1 % mem_write_en $end
+$var wire 1 & mem_to_reg $end
+$var wire 2 ' imm_src [1:0] $end
+$var wire 1 ( alu_src $end
+$var wire 3 ) alu_control [2:0] $end
+$var parameter 32 * CLK_PERIOD $end
+$var parameter 32 + TESTS_NO $end
+$var reg 4 , alu_flags [3:0] $end
+$var reg 1 - clk $end
+$var reg 12 . expected [11:0] $end
+$var reg 20 / instr [31:12] $end
+$var reg 1 0 reset $end
+$scope function ref_model $end
+$upscope $end
+$scope module dut $end
+$var wire 4 1 alu_flags [3:0] $end
+$var wire 1 - clk $end
+$var wire 20 2 instr [31:12] $end
+$var wire 1 0 reset $end
+$var wire 1 ! reg_write_en $end
+$var wire 1 3 reg_write $end
+$var wire 1 " reg_src_b $end
+$var wire 1 # reg_src_a $end
+$var wire 1 $ pc_src $end
+$var wire 1 4 pc_s $end
+$var wire 1 % mem_write_en $end
+$var wire 1 5 mem_write $end
+$var wire 1 & mem_to_reg $end
+$var wire 2 6 imm_src [1:0] $end
+$var wire 4 7 flag_w [3:0] $end
+$var wire 1 ( alu_src $end
+$var wire 3 8 alu_control [2:0] $end
+$scope module cond_logic $end
+$var wire 4 9 alu_flags [3:0] $end
+$var wire 1 - clk $end
+$var wire 4 : cond [3:0] $end
+$var wire 4 ; flag_en [3:0] $end
+$var wire 1 0 reset $end
+$var wire 1 3 reg_write $end
+$var wire 1 4 pc_s $end
+$var wire 1 5 mem_write $end
+$var wire 4 < flags [3:0] $end
+$var wire 4 = flag_w [3:0] $end
+$var wire 1 > cond_ex $end
+$var reg 1 % mem_write_en $end
+$var reg 1 $ pc_src $end
+$var reg 1 ! reg_write_en $end
+$scope module c_ff $end
+$var wire 1 - clk $end
+$var wire 1 ? d $end
+$var wire 1 @ en $end
+$var wire 1 0 reset $end
+$var reg 1 A q $end
+$upscope $end
+$scope module cond_check_i $end
+$var wire 1 B C $end
+$var wire 1 C N $end
+$var wire 1 D V $end
+$var wire 1 E Z $end
+$var wire 4 F cond [3:0] $end
+$var reg 1 > cond_ex $end
+$upscope $end
+$scope module n_ff $end
+$var wire 1 - clk $end
+$var wire 1 G d $end
+$var wire 1 H en $end
+$var wire 1 0 reset $end
+$var reg 1 I q $end
+$upscope $end
+$scope module v_ff $end
+$var wire 1 - clk $end
+$var wire 1 J d $end
+$var wire 1 K en $end
+$var wire 1 0 reset $end
+$var reg 1 L q $end
+$upscope $end
+$scope module z_ff $end
+$var wire 1 - clk $end
+$var wire 1 M d $end
+$var wire 1 N en $end
+$var wire 1 0 reset $end
+$var reg 1 O q $end
+$upscope $end
+$upscope $end
+$scope module decoder_i $end
+$var wire 6 P funct [5:0] $end
+$var wire 2 Q op [1:0] $end
+$var wire 4 R rd [3:0] $end
+$var reg 3 S alu_control [2:0] $end
+$var reg 1 T alu_op $end
+$var reg 1 ( alu_src $end
+$var reg 1 U branch $end
+$var reg 10 V contr_sigs [9:0] $end
+$var reg 4 W flag_en [3:0] $end
+$var reg 2 X imm_src [1:0] $end
+$var reg 1 & mem_to_reg $end
+$var reg 1 5 mem_write $end
+$var reg 1 4 pc_s $end
+$var reg 1 # reg_src_a $end
+$var reg 1 " reg_src_b $end
+$var reg 1 3 reg_write $end
+$upscope $end
+$upscope $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 Y i [31:0] $end
+$upscope $end
+$scope task check_outputs $end
+$upscope $end
+$scope task drive $end
+$upscope $end
+$scope task reset_dut $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1011 +
+b1 *
+$end
+#0
+$dumpvars
+b0 Y
+b0 X
+b0 W
+b100010 V
+0U
+1T
+b0 S
+b0 R
+b0 Q
+b0 P
+0O
+0N
+0M
+0L
+0K
+0J
+0I
+0H
+0G
+b0 F
+0E
+0D
+0C
+0B
+0A
+0@
+0?
+0>
+b0 =
+b0 <
+b0 ;
+b0 :
+b0 9
+b0 8
+b0 7
+b0 6
+05
+04
+13
+b0 2
+b0 1
+10
+b0 /
+bx .
+0-
+b0 ,
+b0 )
+0(
+b0 '
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#1000
+1-
+#2000
+0-
+#3000
+00
+1-
+#4000
+1!
+b10 )
+b10 8
+b10 S
+1>
+b100 P
+b1110 :
+b1110 F
+b11100000010000000000 /
+b11100000010000000000 2
+0-
+#5000
+b100000001000 .
+1-
+#6000
+0-
+#7000
+b1 Y
+1-
+#8000
+1N
+1H
+1@
+1K
+b1111 ;
+b1111 7
+b1111 =
+b1111 W
+1J
+b101 P
+b1 ,
+b1 1
+b1 9
+b11100000010100000000 /
+b11100000010100000000 2
+0-
+#9000
+1D
+b1 <
+1L
+1-
+#10000
+0-
+#11000
+b10 Y
+1-
+#12000
+0N
+0H
+0@
+0K
+b0 ;
+0!
+b0 7
+b0 =
+b0 W
+0>
+0J
+b100 P
+b0 :
+b0 F
+b0 ,
+b0 1
+b0 9
+b10000000000 /
+b10000000000 2
+0-
+#13000
+b1000 .
+1-
+#14000
+0-
+#15000
+b11 Y
+1-
+#16000
+b1111 7
+b1111 =
+b1111 W
+1M
+b101 P
+b1000 ,
+b1000 1
+b1000 9
+b10100000000 /
+b10100000000 2
+0-
+#17000
+1-
+#18000
+0-
+#19000
+b100 Y
+1-
+#20000
+1N
+1H
+1@
+1K
+b1111 ;
+1!
+1(
+b1100010 V
+1>
+0M
+b100101 P
+b1110 :
+b1110 F
+b0 ,
+b0 1
+b0 9
+b11100010010100000000 /
+b11100010010100000000 2
+0-
+#21000
+0D
+b0 <
+0L
+b100000101000 .
+1-
+#22000
+0-
+#23000
+b101 Y
+1-
+#24000
+b11 )
+b11 8
+b11 S
+0(
+b100010 V
+1G
+1?
+1J
+b111 P
+b1 :
+b1 F
+b111 ,
+b111 1
+b111 9
+b10000011100000000 /
+b10000011100000000 2
+0-
+#25000
+1D
+1B
+1C
+1L
+1A
+b111 <
+1I
+b100000001100 .
+1-
+#26000
+0-
+#27000
+b110 Y
+1-
+#28000
+0@
+0K
+b1100 ;
+b1100 7
+b1100 =
+b1100 W
+b0 )
+b0 8
+b0 S
+1(
+b1100010 V
+0G
+0?
+0J
+b100001 P
+b10 :
+b10 F
+b0 ,
+b0 1
+b0 9
+b100010000100000000 /
+b100010000100000000 2
+0-
+#29000
+0C
+b11 <
+0I
+b100000100000 .
+1-
+#30000
+0-
+#31000
+b111 Y
+1-
+#32000
+0N
+0H
+b0 ;
+0!
+1%
+b0 7
+b0 =
+b0 W
+b10 )
+b10 8
+b10 S
+1"
+0T
+b1 '
+b1 6
+b1 X
+03
+15
+b101000101 V
+b1 Q
+b0 P
+b1110 :
+b1110 F
+b11100100000000000000 /
+b11100100000000000000 2
+0-
+#33000
+b10010101001 .
+1-
+#34000
+0-
+#35000
+b1000 Y
+1-
+#36000
+1!
+0%
+0"
+1&
+13
+05
+b1010110 V
+b101 P
+b11100100010100000000 /
+b11100100010100000000 2
+0-
+#37000
+b100001101001 .
+1-
+#38000
+0-
+#39000
+b1001 Y
+1-
+#40000
+1$
+0!
+14
+1#
+1U
+0&
+b10 '
+b10 6
+b10 X
+03
+b1011001000 V
+b10 Q
+b0 P
+b11101000000000000000 /
+b11101000000000000000 2
+0-
+#41000
+b1100101010 .
+1-
+#42000
+0-
+#43000
+1!
+b1010 Y
+1-
+#44000
+b0 )
+b0 8
+b0 S
+1!
+0#
+0U
+0(
+1T
+b0 '
+b0 6
+b0 X
+13
+b100010 V
+b0 Q
+b1111 R
+b11100000000000001111 /
+b11100000000000001111 2
+0-
+#45000
+b101000000000 .
+1-
+#46000
+0-
+#47000
+1!
+1-
