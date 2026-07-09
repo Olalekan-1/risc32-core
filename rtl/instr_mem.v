@@ -2,11 +2,11 @@ module instr_mem(input [31:0] addr,
                  output reg [31:0] read_data
                 );
 
-    reg [31:0] ROM[31:0];
+    reg [31:0] ROM[0:31];
         initial
-            $readmemh("file.dat", ROM);
+            $readmemh("sim/files/file.dat", ROM);
            
         always @(*) begin
-        read_data = ROM[addr[31:2]];
+             read_data = ROM[addr >> 2];
          end
 endmodule
