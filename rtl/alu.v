@@ -32,6 +32,11 @@ module alu(input [31:0] src_a, src_b,
            carry = 0;
            overflow = 0; 
         end
+        3'b101: begin
+            alu_result = src_b;
+            carry = 0;
+            overflow = 0;
+        end
         default: begin
             alu_result = 32'b0;
             carry = 0;

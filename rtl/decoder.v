@@ -37,10 +37,11 @@ module decoder(input [1:0] op,
                 4'b0010: alu_control = 3'b010; // add
                 4'b0011: alu_control = 3'b011; // sub
                 4'b0100: alu_control = 3'b100; // xor
+                4'b0101: alu_control = 3'b101; // mov
                 default: alu_control = 3'b0;
             endcase
-            flag_en[0] = funct[0] & (alu_control == 3'b010 | alu_control == 3'b011);
-            flag_en[1] = funct[0] & (alu_control == 3'b010 | alu_control == 3'b011);
+            flag_en[0] = funct[0] && ((alu_control === 3'b010) || (alu_control == 3'b011));
+            flag_en[1] = funct[0] && ((alu_control === 3'b010) || (alu_control == 3'b011));
             flag_en[2] = funct[0];
             flag_en[3] = funct[0];
         end

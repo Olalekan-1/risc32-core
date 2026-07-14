@@ -26,10 +26,11 @@ module data_mem_tb;
                                input logic [31:0] write_data_i
                                 );
         begin
-           @(negedge clk);
+           @(negedge clk )begin
             mem_write_en = mem_write_en_i;
             addr = addr_i;
             write_data = write_data_i;
+           end
         end
     endtask
 

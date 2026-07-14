@@ -70,9 +70,10 @@ module controller_tb;
                           input logic [3:0]  alu_flags_i);
         begin
 
-            @(negedge clk);
+            @(negedge clk) begin
             instr = instr_i;
             alu_flags = alu_flags_i;
+            end
         end
     endtask
 
@@ -317,7 +318,7 @@ module controller_tb;
 
          reset_dut();
 
-         for (int i = 0; i < 10; i++)
+         for (int i = 0; i < TESTS_NO; i++)
          begin
             drive( instructions[i],  flags[i]);
             $display("instruction code=%0b", instr);
