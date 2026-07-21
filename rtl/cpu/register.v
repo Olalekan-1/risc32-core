@@ -1,4 +1,4 @@
-module reg_file(input clk, reg_write_en, 
+module reg_file(input clk, reg_write_en,
                 input[3:0] reg_addr_1, reg_addr_2, write_addr,
                 input[31:0] write_data, reg_addr_15,
                 output [31:0] read_data_1, read_data_2

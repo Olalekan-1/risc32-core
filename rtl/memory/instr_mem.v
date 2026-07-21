@@ -4,7 +4,7 @@ module instr_mem(input [31:0] addr,
 
     reg [31:0] ROM[0:31];
         initial
-            $readmemh("sim/files/file.dat", ROM);
+            $readmemh("rtl/memory/program.hex", ROM);
            
         always @(*) begin
              read_data = ROM[addr >> 2];
