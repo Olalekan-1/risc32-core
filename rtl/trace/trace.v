@@ -1,5 +1,5 @@
 module trace(input clk, reset, trace_valid, uart_busy, mem_write_en,
-              input [31:0] pc, instr, alu_result, write_data,
+              input [31:0] pc, instr, alu_result, write_data, read_data,
               output reg uart_start, 
               output reg [7:0] uart_data
             );
@@ -11,8 +11,18 @@ module trace(input clk, reset, trace_valid, uart_busy, mem_write_en,
     reg [31:0] trace_data = 0;
     reg [5:0] char_index = 0;
     reg [7:0] next_char = 0;
+    wire is_memory;
+    wire is_load;
+    reg trace_is_memory;
+    reg trace_is_load;
 
-    localparam LAST_CHAR = 55;
+    //assign is_memory       = (instr[27:26] == 2'b01);
+    //assign is_load         = is_memory && instr[20];
+
+    //assign trace_is_memory = (trace_instr[27:26] == 2'b01);
+    //assign trace_is_load   = trace_is_memory && trace_instr[20];
+
+    localparam LAST_CHAR = 63;
 
     /// convert 4 bit hex to 8 bits ascii value.
     function automatic [7:0] hex_to_ascii(input [3:0] nibble);
@@ -67,55 +77,68 @@ module trace(input clk, reset, trace_valid, uart_busy, mem_write_en,
             8: next_char = hex_to_ascii(trace_pc[11:8]);
             9: next_char = hex_to_ascii(trace_pc[7:4]);
             10: next_char = hex_to_ascii(trace_pc[3:0]);
-            //11: next_char = 8'h0D;
-            //12: next_char = 8'h0A;
-            12: next_char=" ";
+            11: next_char=" ";
 
-            13: next_char = "I";
-            14: next_char = "R";
-            15: next_char = "=";
-            16: next_char = hex_to_ascii(trace_instr[31:28]);
-            17: next_char = hex_to_ascii(trace_instr[27:24]);
-            18: next_char = hex_to_ascii(trace_instr[23:20]);
-            19: next_char = hex_to_ascii(trace_instr[19:16]);
-            20: next_char = hex_to_ascii(trace_instr[15:12]);
-            21: next_char = hex_to_ascii(trace_instr[11:8]);
-            22: next_char = hex_to_ascii(trace_instr[7:4]);
-            23: next_char = hex_to_ascii(trace_instr[3:0]);
-            24: next_char = " ";
-            25: next_char = "A";
-            26: next_char = "L";
-            27: next_char = "U";
-            28: next_char = "=";
-            29: next_char = hex_to_ascii(trace_alu[31:28]);
-            30: next_char = hex_to_ascii(trace_alu[27:24]);
-            31: next_char = hex_to_ascii(trace_alu[23:20]);
+            12: next_char = "I";
+            13: next_char = "R";
+            14: next_char = "=";
+            15: next_char = hex_to_ascii(trace_instr[31:28]);
+            16: next_char = hex_to_ascii(trace_instr[27:24]);
+            17: next_char = hex_to_ascii(trace_instr[23:20]);
+            18: next_char = hex_to_ascii(trace_instr[19:16]);
+            19: next_char = hex_to_ascii(trace_instr[15:12]);
+            20: next_char = hex_to_ascii(trace_instr[11:8]);
+            21: next_char = hex_to_ascii(trace_instr[7:4]);
+            22: next_char = hex_to_ascii(trace_instr[3:0]);
+            23: next_char = " ";
+            24: next_char = "A";
+            25: next_char = "L";
+            26: next_char = "U";
+            27: next_char = "=";
+            28: next_char = hex_to_ascii(trace_alu[31:28]);
+            29: next_char = hex_to_ascii(trace_alu[27:24]);
+            30: next_char = hex_to_ascii(trace_alu[23:20]);
+            31: next_char = hex_to_ascii(trace_alu[19:16]);
             32: next_char = hex_to_ascii(trace_alu[15:12]);
             33: next_char = hex_to_ascii(trace_alu[11:8]);
             34: next_char = hex_to_ascii(trace_alu[7:4]);
             35: next_char = hex_to_ascii(trace_alu[3:0]);
             36: next_char = " ";
-            37: next_char = "A";
-            38: next_char = "D";
-            39: next_char = "D";
-            40: next_char = "R";
-            41: next_char = "=";
+            37: next_char = trace_is_load ? "L" : "S";
+            38: next_char = trace_is_load ? "D" : "T";
+            39: next_char = "R";
+            40: next_char = " ";
+            41: next_char = "[";
             42: next_char = hex_to_ascii(trace_alu[31:28]);
             43: next_char = hex_to_ascii(trace_alu[27:24]);
             44: next_char = hex_to_ascii(trace_alu[23:20]);
-            45: next_char = hex_to_ascii(trace_alu[15:12]);
-            46: next_char = hex_to_ascii(trace_alu[11:8]);
-            47: next_char = hex_to_ascii(trace_alu[7:4]);
-            48: next_char = hex_to_ascii(trace_alu[3:0]);
-            49: next_char = " ";
-            50: next_char = "D";
-            51: next_char = "A";
-            52: next_char = "T";
-            53: next_char = "A";
-
-
-            54: next_char = 8'h0D;
-            55: next_char = 8'h0A;
+            45: next_char = hex_to_ascii(trace_alu[19:16]);
+            46: next_char = hex_to_ascii(trace_alu[15:12]);
+            47: next_char = hex_to_ascii(trace_alu[11:8]);
+            48: next_char = hex_to_ascii(trace_alu[7:4]);
+            49: next_char = hex_to_ascii(trace_alu[3:0]);
+            50: next_char = "]";
+            51: next_char = " ";
+            52: next_char = "=";
+            53: next_char = " ";
+            54: next_char = hex_to_ascii(trace_data[31:28]);
+            55: next_char = hex_to_ascii(trace_data[27:24]);
+            56: next_char = hex_to_ascii(trace_data[23:20]);
+            57: next_char = hex_to_ascii(trace_data[19:16]);
+            58: next_char = hex_to_ascii(trace_data[15:12]);
+            59: next_char = hex_to_ascii(trace_data[11:8]);
+            60: next_char = hex_to_ascii(trace_data[7:4]);
+            61: next_char = hex_to_ascii(trace_data[3:0]);
+           /* 54: next_char = hex_to_ascii(read_data[31:28]);
+            55: next_char = hex_to_ascii(read_data[27:24]);
+            56: next_char = hex_to_ascii(read_data[23:20]);
+            57: next_char = hex_to_ascii(read_data[19:16]);
+            58: next_char = hex_to_ascii(read_data[15:12]);
+            59: next_char = hex_to_ascii(read_data[11:8]);
+            60: next_char = hex_to_ascii(read_data[7:4]);
+            61: next_char = hex_to_ascii(read_data[3:0]);*/
+            62: next_char = 8'h0D;
+            63: next_char = 8'h0A;
 
             default: next_char = 8'h00;
         endcase
@@ -147,7 +170,16 @@ module trace(input clk, reset, trace_valid, uart_busy, mem_write_en,
                 trace_pc    <= pc;
                 trace_instr <= instr;
                 trace_alu   <= alu_result;
-                trace_data  <= write_data;
+                trace_is_memory <= (instr[27:26] == 2'b01);
+
+                //trace_is_memory = (trace_instr[27:26] == 2'b01);
+                trace_is_load   = (instr[27:26] == 2'b01 && instr[20]);
+                if (mem_write_en)
+                        trace_data <= write_data;
+                else if (trace_is_load)
+                        trace_data <= read_data;
+                else
+                     trace_data <= 32'hFFFFFFFF;
                 char_index <= 0;
                 state <= SEND_CHAR;
             end
@@ -167,11 +199,14 @@ module trace(input clk, reset, trace_valid, uart_busy, mem_write_en,
 
         end
         WAIT_DONE: begin
-            if(!uart_busy) begin
+            if(!uart_busy) begin                    
                 if(char_index == LAST_CHAR)
                     state <= IDLE;
                 else begin
-                    char_index <= char_index + 1;
+                     if(!trace_is_memory && char_index == 35)
+                        char_index <= LAST_CHAR - 1; 
+                    else
+                        char_index <= char_index + 1;
                     state <= SEND_CHAR;
                 end
             end
