@@ -2,7 +2,7 @@
 
 module cpu_tb;
 
-    logic clk, reset, mem_write_en;
+    logic clk, reset, mem_write_en, pc_en = 1'b1;
     logic [31:0] instr, read_data, write_data, result, pc;
 
     localparam CLK_PERIOD = 1;
@@ -23,9 +23,10 @@ module cpu_tb;
     cpu dut(.clk(clk),
             .reset(reset),
             .mem_write_en(mem_write_en),
+            .pc_en(pc_en),
             .instr(instr),
             .pc(pc),
-            .write_addr(result),
+            .alu_result(result),
             .write_data(write_data)
             );
 
@@ -107,6 +108,11 @@ module cpu_tb;
         data[5] = 32'h0;
         instructions[6] = 32'hE0146005; // AND R6, R4 R5 ; R6 = 0
         data[6] = 32'h0; 
+        instructions[7] = 32'hE404501E; // STR R5, [R4, #30] ; mem[30] = 25
+        data[7] = 32'h0; 
+        instructions[8] = 32'hE4147014; // LDR R7, [R4, #30] ; R7 = 25
+        data[8] = 32'h19; 
+
 
 
     end
@@ -165,6 +171,13 @@ module cpu_tb;
                 out.write_data = 32'h19;
                 out.result = 32'h0;
             end
+
+            32'hE404501E: begin
+                out.mem_write_en = 1'b1;
+                out.pc = 32'h20;
+                out.write_data = 32'h19;
+                out.result = 32'h1E;
+            end
         default: out = '0;
         endcase
     return out;
@@ -179,7 +192,7 @@ module cpu_tb;
         reset_dut();
         $display("pc_content=%0h", pc);
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 8; i++)
         begin
             //$display("alu_srca=%0d... alu_srcb=%0d ... alu_result=%0d", dut.datapath_i.src_a, dut.datapath_i.src_b, dut.datapath_i.result);
             //$display("flags [ZNCV] = %0b%0b%0b%0b", dut.controller_i.cond_logic.z_ff.q, dut.controller_i.cond_logic.n_ff.q, dut.controller_i.cond_logic.c_ff.q, dut.controller_i.cond_logic.v_ff.q);
@@ -190,8 +203,8 @@ module cpu_tb;
             check_outputs(expected);
         end
 
-       //for(int i= 0; i < 5; i++)
-        // $display("content of destination register[%0d]=%0d", i, dut.datapath_i.rf.reg_file[i]);
+       for(int i= 0; i < 6; i++)
+        $display("content of destination register[%0d]=%0d", i, dut.datapath_i.rf.reg_file[i]);
 
 
         $display("DONE");
